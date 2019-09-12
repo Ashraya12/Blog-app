@@ -1,0 +1,16 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<h1>View Posts of {{ view.kwargs.username|title }}</h1>
+{% for post in posts %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}" alt="">
+            <a class="mr-2" href="{% url 'user_post' post.author.username %}">{{ post.author|title }}</a>
+            <small class="text-muted">{{ post.date_posted|date:'d F, Y' }}</small>
+        </div>
+        <h2><a class="article-title" href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+        <p class="article-content">{{ post.content }}</p>
+    </div>
+</article>{% endfor %}
+{% endblock content %}
